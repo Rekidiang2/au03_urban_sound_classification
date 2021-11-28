@@ -1,6 +1,6 @@
 # Urban Sound Classification
 
-<img src="./images/cover.png" width="1000" alt="photo cover" />
+<img src="./images/cover.jpg" width="1000" alt="photo cover" />
 
 [competition](https://datahack.analyticsvidhya.com/contest/practice-problem-urban-sound-classification/#DiscussTab)
 
