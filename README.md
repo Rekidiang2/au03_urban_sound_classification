@@ -33,9 +33,9 @@ In this project  a dataset with music of different styles such us jazz, classic 
 * ├── data_documentation.pdf
 #### analysis_and_training
 * ├── 1_data_preprocessing
-* ├── 2_Music_Genre_Classification_with_ANN.ipynb
-* ├── 3_Music_Genre_Classification_with_CNN.ipynb
-* ├── 4_Music_Genre_Classification_with_RNN.ipynb
+* ├── 2_urban_sound_Classification_with_ANN.ipynb
+* ├── 3_urban_sound_Classification_with_CNN.ipynb
+* ├── 4_urban_sound_Classification_with_RNN.ipynb
 * ├── helpers.py
 * ├── models_config.py
 #### figures
@@ -69,32 +69,32 @@ In this project  a dataset with music of different styles such us jazz, classic 
 
 ### 3.1. CLONE PROJECT DIRECTORY
 
-+ $ git clonehttps://github.com/Rekidiang2/au01_music_genre_classification.git
-+ $ cd au01_music_genre_classification
++ $ git clonehttps://github.com/Rekidiang2/au03_urban_sound_classification.git
++ $ cd au03_urban_sound_classification
 
 ### 3.2. CREATE & ACTIVATE VIRTUAL ENVIRONMENT
 
 #### 3.2.1. WITH PIP and VENV
 
 ##### (Windows) 
-+ $ python -m venv au01_venv 
-+ $ p01ml_venv\Scripts\activate (<= Activate virtual Environment)
++ $ python -m venv au03_venv 
++ $ au03_venv\Scripts\activate (<= Activate virtual Environment)
 + $ deactivate (<= Deactivate virtual Environment)
 + $ pip install -r requirements.txt
 + Set  VIRTUAL ENVIRONMENT as KERNEL : 
-  +  $ python -m ipykernel install --user --name au01_venv --display-name "au01_kernel"
+  +  $ python -m ipykernel install --user --name au03_venv --display-name "au03_kernel"
 + $ jupyter notebook
-+ Go to Kernel -> Change kernel -> au01_kernel
++ Go to Kernel -> Change kernel -> au03_kernel
 
 ##### (MasOS || LINUX)
-+ $ python3 -m venv p01ml_venv 
-+ $ source au01_venv/bin/activate (<= Activate virtual Environment)  
++ $ python3 -m venv au03_venv 
++ $ source au03_venv/bin/activate (<= Activate virtual Environment)  
 + $ deactivate (<= Deactivate virtual Environment)
 + $ pip install -r requirements.txt
 + Set  VIRTUAL ENVIRONMENT as KERNEL : 
-  +  $ python -m ipykernel install --user --name au01_venv --display-name "au01_kernel"
+  +  $ python -m ipykernel install --user --name au03_venv --display-name "au03_kernel"
 + $ jupyter notebook
-+ Go to Kernel -> Change kernel -> au01_kernel
++ Go to Kernel -> Change kernel -> au03_kernel
 
 
 #### 3.2.2. WITH CONDA
@@ -127,7 +127,7 @@ In this project  a dataset with music of different styles such us jazz, classic 
 ## 6. About Me
 ___
 
-### I'm a data scientist, software Engineer. data and technology passionate person, Artificial Intelligence enthusiast 
+### I'm Data Analyst, Data Scientist and Web Developer. Data and technology passionate person, Artificial Intelligence enthusiast. 
 
 > My Website [Click Here](https://rekidiangdata-s.github.io/kiesediangebeni/)
 
