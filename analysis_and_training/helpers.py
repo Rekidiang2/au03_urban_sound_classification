@@ -110,6 +110,20 @@ DATASET_PATH = "data/sub_raw_data"
 JSON_PATH = "data/prepared_data.json"
 SAMPLES_TO_CONSIDER = 22050 # 1 sec. of audio // sample rate number of sample per second
 
+def load_data(data_path):
+    """Loads training dataset from json file.
+        :param data_path (str): Path to json file containing data
+        :return X (ndarray): Inputs
+        :return y (ndarray): Targets
+    """
+
+    with open(data_path, "r") as fp:
+        data = json.load(fp)
+
+    X = np.array(data["mfcc"])
+    y = np.array(data["labels"])
+    return X, y
+
 
 def preprocess_dataset(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_length=512):
     """Extracts MFCCs from music dataset and saves them into a json file.

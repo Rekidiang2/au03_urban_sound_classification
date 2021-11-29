@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
 import tensorflow.keras as keras
 import matplotlib.pyplot as plt
@@ -188,7 +189,7 @@ def model_loss_acc(model, X_train, y_train, X_test, y_test, X_validation, y_vali
     test_loss = round(score_test[0]*100, 2)
     val_loss = round(score_val[0]*100, 2)
     st_loss, test_acc = model.evaluate(X_test, y_test, verbose=2)
-    gen = 100 - test_acc
+    #gen = 100 - test_acc
     return pd.DataFrame({'Accuracy':[train_acc, val_acc, test_acc],  
                          'Loss':[train_loss, val_loss, test_loss]}, 
                         index=['Training', 'Validation', 'Testing']).T
