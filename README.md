@@ -101,18 +101,18 @@ In this project  a dataset with music of different styles such us jazz, classic 
 
 + Verify if you have conda installed ($conda --version) if not go to [anconda](https://www.anaconda.com/products/individual) or [miniconda](https://docs.conda.io/en/latest/miniconda.html) to download and install it
 
-+ $ conda create -n au01_venv python=3.7
-+ $ conda activate au01_venv (<= Activate virtual Environment)
++ $ conda create -n au03_venv python=3.7
++ $ conda activate au03_venv (<= Activate virtual Environment)
 + $ conda deactivate  (<= Deactivate virtual Environment)
 + Set  VIRTUAL ENVIRONMENT as KERNEL : 
-  +  $ python -m ipykernel install --user --name au01_venv --display-name "au01_kernel"
+  +  $ python -m ipykernel install --user --name au03_venv --display-name "au03_kernel"
 + $ jupyter notebook
-+ Go to Kernel -> Change kernel -> au01_kernel
++ Go to Kernel -> Change kernel -> au03_kernel
 
-
+ 
 #### Manage kernel
 + $ jupyter kernelspec list (<= list all ipykernel in your system)
-+ $ jupyter kernelspec uninstall au01_kernel (<= Delete the ipykernel in your system)
++ $ jupyter kernelspec uninstall au03_kernel (<= Delete the ipykernel in your system)
 
 ## 4. Deployment (Real world Use)
 

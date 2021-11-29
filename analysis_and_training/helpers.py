@@ -2,18 +2,44 @@ import numpy as np
 import pandas as pd
 import librosa, librosa.display
 import matplotlib.pyplot as plt
+import random
 
-def audio_properties(file, sr=22050):
+def copy_file(src, dst):
+    """Copy file from multiple folder to one single folder"""
+    import os
+    import shutil 
+    rootdir = '../data/urban_sound'
+    dst = '../data/urban_sound_all'
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:             
+            src = os.path.join(subdir, file)
+            #shutil.copyfile(src, dst)
+            #shutil.copyfileobj(src, dst)
+            shutil.copy(src, dst)  # dst can be a folder; use copy2() to preserve timestamp
+            #shutil.copy2(src, dst)
+            # 
+def random_file(DATASET_PATH, METADATA_PATH):
+    '''Randomly select file from a folder'''
+    mdata = pd.read_csv(METADATA_PATH)
+    i = random.choice(mdata.index)
+
+    file_name = mdata.loc[i]['slice_file_name']
+    file_class = mdata['class'][i]
+    file_path = DATASET_PATH + '/' + file_name
+    print("Dataset Loaded ... ")
+    return file_path, file_class  
+
+def audio_properties(file, file_class, sr=22050):
     signal, sample_rate = librosa.load(file, sr=sr)
     tempo, beat_frames = librosa.beat.beat_track(signal, sample_rate)
-    print("Some audio properties\n"+'--'*10)
+    print(f"|Audio Name: {file_class}")
     print(f"|Audio Signal Length : {signal.shape}\n|Sample Rate: {sample_rate}\n|Tempo : {tempo} ")
     bf = pd.DataFrame({"Beat Frame":list(beat_frames)})
     return bf.T
 
 
-def waveform(file):
-    # WAVEFORM
+def waveform(file, file_class):
+    # WAVEFORMS
     # display waveform
     signal, sample_rate = librosa.load(file, sr=22050)
     FIG_SIZE = (13,5)
@@ -21,10 +47,10 @@ def waveform(file):
     librosa.display.waveplot(signal, sample_rate, alpha=0.4)
     plt.xlabel("Time (s)")
     plt.ylabel("Amplitude")
-    plt.title("Waveform")
+    plt.title("Waveform | " + file_class)
     
     
-def spectrum(file) :
+def spectrum(file, file_class) :
     signal, sample_rate = librosa.load(file, sr=22050)
     # perform Fourier transform
     fft = np.fft.fft(signal)
@@ -45,7 +71,7 @@ def spectrum(file) :
     plt.plot(f, spectrum, alpha=0.4)
     plt.xlabel("Frequency")
     plt.ylabel("Magnitude")
-    plt.title("Power spectrum (Entire)")
+    plt.title("Power spectrum (Entire) | " + file_class)
     
     # plot spectrum (left)
     plt.figure(figsize=(13,5))
@@ -54,9 +80,9 @@ def spectrum(file) :
     plt.plot(left_f, left_spectrum, alpha=0.4)
     plt.xlabel("Frequency")
     plt.ylabel("Magnitude")
-    plt.title("Power spectrum (left)")
+    plt.title("Power spectrum (left) | " + file_class)
     
-def spectogram(file, hop_length=512, n_fft = 2048):
+def spectogram(file, file_class, hop_length=512, n_fft = 2048):
     signal, sample_rate = librosa.load(file, sr=22050)
     # STFT -> spectrogram
     # calculate duration hop length and window in seconds
@@ -75,7 +101,7 @@ def spectogram(file, hop_length=512, n_fft = 2048):
     plt.xlabel("Time")
     plt.ylabel("Frequency")
     plt.colorbar()
-    plt.title("Spectrogram")
+    plt.title("Spectrogram | " + file_class)
     
     # display spectrogram
     # apply logarithm to cast amplitude to Decibels
@@ -85,9 +111,9 @@ def spectogram(file, hop_length=512, n_fft = 2048):
     plt.xlabel("Time")
     plt.ylabel("Frequency")
     plt.colorbar(format="%+2.0f dB")
-    plt.title("Spectrogram (dB)")
+    plt.title("Spectrogram (dB) | " + file_class)
     
-def mfccs(file, hop_length=512, n_fft = 2048,  n_mfcc=13):
+def mfccs(file, file_class, hop_length=512, n_fft = 2048,  n_mfcc=13):
     signal, sample_rate = librosa.load(file, sr=22050)
     MFCCs = librosa.feature.mfcc(signal, sample_rate, n_fft=n_fft, hop_length=hop_length, n_mfcc=n_mfcc)
     # display MFCCs
@@ -96,7 +122,7 @@ def mfccs(file, hop_length=512, n_fft = 2048,  n_mfcc=13):
     plt.xlabel("Time")
     plt.ylabel("MFCC coefficients")
     plt.colorbar()
-    plt.title("MFCCs")
+    plt.title("MFCCs | " + file_class)
     # show plots
     plt.show()
     
@@ -181,7 +207,7 @@ def preprocess_dataset(dataset_path, json_path, num_mfcc=13, n_fft=2048, hop_len
     with open(json_path, "w") as fp:
         json.dump(data, fp, indent=4)
         
-    print(" >>> Data Extracted for Training <<< ")
+    print(" >>> Data Ready for Training | Saved in ", json_path)
 
 
 #if __name__ == "__main__":
